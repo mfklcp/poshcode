@@ -1,0 +1,8 @@
+/*
+ * @Autor: Márcio Franklin
+ * @E-mail: mfklcp@gmail.com
+ * @License: MIT
+ *
+ */
+
+CKEDITOR.plugins.setLang("colordialog","ko",{clear:"비우기",highlight:"강조",options:"색상 옵션",selected:"선택된 색상",title:"색상 선택"});

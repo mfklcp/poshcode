@@ -1,0 +1,326 @@
+<!--
+  ~ @Autor: Márcio Franklin
+  ~ @E-mail: mfklcp@gmail.com
+  ~ @License: MIT
+  ~
+  -->
+
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" th:lang="pt-br">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Pagina do Aluno </title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/oneui.min.css}" />
+
+
+</head>
+<body>
+
+<div id="page-container" class="page-header-fixed page-header-dark">
+    <header id="page-header">
+        <!-- Header Content -->
+        <div class="content-header">
+            <!-- Left Section -->
+            <div class="d-flex align-items-center">
+                <button type="button" class="btn btn-sm btn-dual mr-2 d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
+                    <i class="fa fa-fw fa-bars"></i>
+                </button>
+
+                <h1 class="mr-2 d-none d-lg-inline-block" style="padding-top:20px;color:white ">
+                    PoshCode
+                </h1>
+                <button type="button" class="btn btn-sm btn-dual mr-2" data-toggle="modal" data-target="#one-modal-apps">
+                    <i class="si si-grid"></i>
+                </button>
+
+                <button type="button" class="btn btn-sm btn-dual d-sm-none" data-toggle="layout" data-action="header_search_on">
+                    <i class="si si-magnifier"></i>
+                </button>
+
+                <form class="d-none d-sm-inline-block" action="be_pages_generic_search.html" method="POST">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control form-control-alt" placeholder="Search.." id="page-header-search-input2" name="page-header-search-input2">
+                        <div class="input-group-append">
+                                    <span class="input-group-text bg-body border-0">
+                                        <i class="si si-magnifier"></i>
+                                    </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="d-flex align-items-center">
+                <div class="dropdown d-inline-block ml-2">
+                    <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="rounded" th:src="@{/media/avatars/avatar10.jpg}" alt="Header Avatar" style="width: 18px;">
+                        <span class="d-none d-sm-inline-block ml-1" th:text="${user.nome}" ></span>
+                    </button>
+
+                </div>
+
+                <div class="dropdown d-inline-block ml-2">
+                    <a class="btn btn-sm btn-dual" href="/logout">
+                        <i class="si si-close"></i>
+                        <span >Logout</span>
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div id="page-header-search" class="overlay-header bg-white">
+            <div class="content-header">
+                <form class="w-100" action="be_pages_generic_search.html" method="POST">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <button type="button" class="btn btn-danger" data-toggle="layout" data-action="header_search_off">
+                                <i class="fa fa-fw fa-times-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Search or hit ESC.." id="page-header-search-input" name="page-header-search-input">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="page-header-loader" class="overlay-header bg-white">
+            <div class="content-header">
+                <div class="w-100 text-center">
+                    <i class="fa fa-fw fa-circle-notch fa-spin"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main id="main-container">
+
+        <div class="bg-body-light">
+            <div class="content content-full">
+                <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                    <img th:src="@{/media/avatars/avatar0.jpg}" alt="" />
+                    <h1 class="flex-sm-fill h3 my-2">
+                        <small class="font-size-base font-w400 text-muted" style="padding-left: 20px"> <span th:text="${user.nome}"></span>  <span th:text="${user.nickname}"></span></small>
+                    </h1>
+                    <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                        Rank Global: #<br>Rank Institucional: #<br> Rank Turma: #
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="block">
+            <ul class="nav nav-tabs nav-tabs-block js-tabs-enabled" data-toggle="tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link show active" href="#btabs-static-home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link show" href="#btabs-static-profile">Profile</a>
+                </li>
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href="#btabs-static-settings">
+                        <i class="si si-settings"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="block-content tab-content">
+
+            <!-- Page Content -->
+            <div class="tab-pane show active" id="btabs-static-home" role="tabpanel">
+
+                <div style="display:flex">
+                    <div class="col-md-8 col-lg-8">
+                        <div class="block block-themed">
+                                <div class="block-header bg-flat">
+                                    <h3 class="block-title">Novas Questões</h3>
+                                </div>
+                            <div class="block-content">
+                                <table class="table table-striped table-vcenter">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" style="width: 50px;">Qid</th>
+                                        <th>Titulo</th>
+                                        <th class="d-none d-sm-table-cell" style="width: 15%;">Autor</th>
+                                        <th class="text-center" style="width: 100px;">Grupo</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <th:block th:each="q : ${questoes}">
+                                        <tr>
+                                            <td class="text-center" scope="row" th:text="${q.id}">#</td>
+                                            <td class="font-w600 font-size-sm">
+                                                <a th:text="${q.titulo}" th:href="@{/aluno/questao/} + ${q.urlFile}"></a>
+                                            </td>
+                                            <td class="text-left">
+                                                <span th:text="${q.autor.nome}">Prof</span>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="block block-themed">
+                            <div class="block-header bg-modern">
+                                <h3 class="block-title">Top Rank Semanal</h3>
+                            </div>
+                            <div class="block-content">
+                                <table class="table table-striped table-vcenter">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" style="width: 50px;">#</th>
+                                        <th>Name</th>
+                                        <th class="d-none d-sm-table-cell" style="width: 15%;">Patente</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex">
+                    <div class="col-md-12">
+                        <div class="block block-themed">
+                            <div class="block-header bg-gray-dark">
+                                <h3 class="block-title">Questões Respondidas</h3>
+                            </div>
+                            <div class="block-content">
+                                <table class="table table-striped table-vcenter">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" style="width: 50px;">Qid</th>
+                                        <th>Titulo</th>
+                                        <th class="d-none d-sm-table-cell" style="width: 15%;">Status</th>
+                                        <th class="text-center" style="width: 100px;">Tempo</th>
+                                        <th class="text-center" style="width: 100px;">Retorno</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each="r : ${respostas}">
+                                        <tr>
+                                            <td class="text-center" scope="row" th:text="${r.questao.id}">#</td>
+                                            <td class="font-w600 font-size-sm">
+                                                <a th:text="${r.questao.titulo}" th:href="@{/aluno/questao/} + ${r.questao.urlFile}"></a>
+                                            </td>
+                                            <td class="text-left">
+                                                <span th:text="${r.correta}">Prof</span>
+                                            </td>
+                                            <td class="text-left">
+                                                <span th:text="${r.tempoDeExecStr}">Prof</span>
+                                            </td>
+                                            <td class="text-left">
+                                                <span th:text="${r.retorno}">Prof</span>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
+            </div>
+        </div>
+</main>
+
+    <footer id="page-footer" class="bg-body-light">
+        <div class="content py-3">
+            <div class="row font-size-sm">
+                <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-right">
+                    Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="https://1.envato.market/ydb" target="_blank">pixelcave</a>
+                </div>
+                <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left">
+                    <a class="font-w600" href="https://1.envato.market/xWy" target="_blank">OneUI 4.1</a> &copy; <span data-toggle="year-copy">2018</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="one-modal-apps" tabindex="-1" role="dialog" aria-labelledby="one-modal-apps" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-top modal-sm" role="document">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent mb-0">
+                    <div class="block-header bg-primary-dark">
+                        <h3 class="block-title">Apps</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                <i class="si si-close"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full">
+                        <div class="row gutters-tiny">
+                            <div class="col-6">
+                                <!-- CRM -->
+                                <a class="block block-rounded block-themed bg-default" href="javascript:void(0)">
+                                    <div class="block-content text-center">
+                                        <i class="si si-speedometer fa-2x text-white-75"></i>
+                                        <p class="font-w600 font-size-sm text-white mt-2 mb-3">
+                                            CRM
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a class="block block-rounded block-themed bg-danger" href="javascript:void(0)">
+                                    <div class="block-content text-center">
+                                        <i class="si si-rocket fa-2x text-white-75"></i>
+                                        <p class="font-w600 font-size-sm text-white mt-2 mb-3">
+                                            Products
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a class="block block-rounded block-themed bg-success mb-0" href="javascript:void(0)">
+                                    <div class="block-content text-center">
+                                        <i class="si si-plane fa-2x text-white-75"></i>
+                                        <p class="font-w600 font-size-sm text-white mt-2 mb-3">
+                                            Sales
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a class="block block-rounded block-themed bg-warning mb-0" href="javascript:void(0)">
+                                    <div class="block-content text-center">
+                                        <i class="si si-wallet fa-2x text-white-75"></i>
+                                        <p class="font-w600 font-size-sm text-white mt-2 mb-3">
+                                            Payments
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script type="application/javascript" th:src="@{/js/oneui.core.min.js}"></script>
+<script type="application/javascript" th:src="@{/js/oneui.app.min.js}"></script>
+
+</body>
+</html>

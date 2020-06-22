@@ -1,0 +1,40 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.0.BUILD-SNAPSHOT'
+    id 'java'
+    id 'war'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'mfklcp.monografia'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/snapshot' }
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.security:spring-security-oauth2-client'
+
+    implementation 'io.jsonwebtoken:jjwt:0.5.1'
+    compile group: 'com.github.slugify', name: 'slugify', version: '2.3'
+
+    compile group: 'redis.clients', name: 'jedis', version: '3.1.0-m1'
+    
+
+    runtimeOnly 'mysql:mysql-connector-java'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+}

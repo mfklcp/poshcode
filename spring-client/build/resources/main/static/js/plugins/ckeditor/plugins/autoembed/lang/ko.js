@@ -1,0 +1,8 @@
+/*
+ * @Autor: Márcio Franklin
+ * @E-mail: mfklcp@gmail.com
+ * @License: MIT
+ *
+ */
+
+CKEDITOR.plugins.setLang("autoembed","ko",{embeddingInProgress:"붙여넣은 URL 첨부 시도 중...",embeddingFailed:"이 URL은 자동으로 첨부할 수 없습니다."});
